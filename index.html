@@ -52,7 +52,7 @@
 
         #visual-area {
             width: 100%;
-            height: 380px; /* 稍微調整高度以完美呈現上傳的精緻 16:9 圖片 */
+            height: 380px; 
             background: #04060a;
             border: 1px solid #1e2838;
             border-radius: 8px;
@@ -105,7 +105,6 @@
             box-shadow: 0 0 8px rgba(90, 115, 142, 0.3);
         }
 
-        /* 歷史真相大白的刺眼白光特效 */
         .truth-white {
             background: #f5f6f7 !important;
             color: #1f232a !important;
@@ -127,13 +126,11 @@
             color: #ffffff;
         }
 
-        /* 沉溺虛幻浪漫的昏暗特效 */
         .romantic-dark {
             border-color: #ff9800 !important;
             box-shadow: 0 0 25px rgba(255, 152, 0, 0.2) !important;
         }
 
-        /* 懸疑陰暗特效 */
         .horror-dark {
             animation: horrorPulse 0.5s infinite alternate;
             border-color: #7a1f1d !important;
@@ -165,8 +162,7 @@
         正在調閱歷史檔案，重組軌道...
     </div>
 
-    <div class="btn-container" id="choices-container">
-        </div>
+    <div class="btn-container" id="choices-container"></div>
 </div>
 
 <script>
@@ -212,7 +208,7 @@
         level4: {
             level: 4, time: "01:10 AM", 
             img: "Question-4.png", 
-            text: "【第 4 關：沉睡暴龍的氣味】\n在不同的軌道上，你看到了早晨五點半北上的班車，以及一台沐浴在月光下的 R7 柴油調車機。你隱隱感覺它發出暴龍般的吼聲，吐出好聞的柴油味。\n你摘下月台旁盛開的野薑花，你想起了阿公曾經說過，當年他在十六份驛（勝興站）等車時，那輛「時間表上冇的車」掀起吹天的蒸汽，連滿山的翠葉都被蒸炊出一股清香。你決定：",
+            text: "【第 4 關：沉睡暴龍的氣味】\n在不同的軌道上，你看到了早晨五點半北上的班車，以及一台沐浴在月光下的 R7 柴油調車機。快要發出暴龍般的吼聲，吐出好聞的柴油味。\n你摘下月台旁盛開的野薑花，你想起了阿公曾經說過，當年他在十六份驛（勝興站）等車時，那輛「時間表上冇的車」掀起吹天的蒸汽，連滿山的翠葉都被蒸炊出一股清香。你決定：",
             choices: [
                 { text: "A. 將野薑花獻給鐵軌，希望這股人性芬芳能傳承阿公口中那段奇幻又美麗的記憶。", nextScene: "level5", hpChange: -5, badge: "野薑花" },
                 { text: "B. 站在原地深吸柴油味，心心念念自己一定要買硬票、補票，永遠為火車活下去。", nextScene: "level5", hpChange: -10 },
@@ -224,7 +220,7 @@
             img: "Question-5.png", 
             text: "【第 5 關：黑白相片裡的囚牢】\n1503 次冷平快車入站，尖銳的煞車聲中，你走上列車。車窗湧入的強風逆著你，你不得不扶著翠綠皮座椅前行。\n火車移動，風景後移。在空蕩的車廂裡，你掏出那張阿公獨坐車椅的黑白照片。照片中阿公面部因採光不足而髮黑。這時數十個車窗落下亮光，你突然發現：",
             choices: [
-                { text: "A. 光影反差下，車窗的縱向鐵欄杆投射在阿公身上。如果不仔細看，那光影格柵，彷彿一個暗無天日的囚牢。這張照片不是旅行，是禁錮。", nextScene: "level6", hpChange: 20 },
+                { text: "A. 光影反差下，車窗的縱向鐵欄杆投射在阿公身上。如果不仔細看，那光影格柵，彷彿一個暗無天日的囚牢。這張照片不是旅行，是禁庫。", nextScene: "level6", hpChange: 20 },
                 { text: "B. 阿公的背脊展示出一派定靜，展示著老一輩的神態，為自己說過的神祕列車樹立誠信。", nextScene: "level6", hpChange: -10 },
                 { text: "C. 照片太模糊了，拍不出夜景的細微之處，多半像一場滑過髮際的春夢，不需深究。", nextScene: "level6", hpChange: -5 }
             ]
@@ -249,7 +245,7 @@
                 { text: "C. 歷史的真相就像這陣強光一樣刺眼，威權體制的機器（E200型）開過去時，總是帶著機槍般掃射、令人窒息的壓迫感。", nextScene: "level8", hpChange: 15 }
             ]
         },
-        level8: {
+        level8: { // 💡 修正處：原本被誤寫為 level4，現已改回 level8 確保正常銜接
             level: 8, time: "02:00 AM", 
             img: "Question-8.png", 
             text: "【第 8 關：傳說的戳破】\n你提高音量問大學生們知不知道奔馳在舊山線的神祕列車。穿紀念服的年輕人提高音量說：『我曾在網路看過這篇文章……不過，那是傳說而已。』\n你知道那篇文章是你貼的。你有些沮喪，但你突然想起八年前在海平快車上，阿公談起這件事的表情——阿公說完神祕列車停靠勝興載他之後，便「沉默如雕像」，再也不肯往下說。你現在意識到阿公的沉默是因為：",
@@ -272,7 +268,7 @@
         level10: {
             level: 10, time: "02:50 AM", 
             img: "Question-10.png", 
-            text: "【第 10 關：純粹的黑暗與白晝之光】\n你記起了最終的真相。阿公臨終前，在那個純粹黑暗的病房裡，你興高采烈地拿著自己畫的「獨眼蒸汽巨龍」給阿公看，喊著火車要帶阿公回家了。\n\n當時阿公卻因為這幅畫「太亮而別過頭，夾肩地哭起來」，一生進入莫名惆悵。\n那是因為你眼中的光明與好玩，恰恰是他一生中最痛苦、導致家庭破碎的政治創傷。歷史的真相層層剝開，此時冷平快車即將駛入山洞，你決定：",
+            text: "【第 10 關：純粹的黑暗與白晝之光】\n你記記了最終的真相。阿公臨終前，在那個純粹黑暗的病房裡，你興高采烈地拿著自己畫的「獨眼蒸汽巨龍」給阿公看，喊著火車要帶阿公回家了。\n\n當時阿公卻因為這幅畫「太亮而別過頭，夾肩地哭起來」，一生進入莫名惆悵。\n那是因為你眼中的光明與好玩，恰恰是他一生中最痛苦、導致家庭破碎的政治創傷。歷史的真相層層剝開，此時冷平快車即將駛入山洞，你決定：",
             choices: [
                 { text: "A. 拒絕面對這份殘酷。大喊：『今天晚上，我要乘著月光找到那列浪漫的神祕列車！』", nextScene: "check_destiny", dest: "A" },
                 { text: "B. 擁抱這份傷痛。將手中的野薑花與車票握緊：『歷史不該被遺忘，我要替沉默的阿公，背負這份家族的重量。』", nextScene: "check_destiny", dest: "B" },
@@ -293,6 +289,11 @@
 
         gameState.currentScene = sceneKey;
         const scene = storyData[sceneKey];
+
+        if (!scene) {
+            console.error("找不到場景資料:", sceneKey);
+            return;
+        }
 
         if (sceneKey === "check_destiny") {
             const destType = scene.chosenDest;
@@ -316,6 +317,10 @@
             return;
         }
 
+        // 更新狀態欄資訊
+        gameState.level = scene.level;
+        gameState.time = scene.time;
+        
         document.getElementById("level-display").innerText = gameState.level + "/10";
         document.getElementById("time-display").innerText = gameState.time;
         document.getElementById("hp-display").innerText = gameState.hp + "%";
@@ -370,7 +375,7 @@
             titleText = "【惆悵結局 ── 一生進入莫名惆悵】";
             endImg = "Sad-End.png"; 
             containerClass = "horror-dark";
-            endText = "你站在真相與傳說的交界，既無法完全沉溺於神祕火車的夢幻，又承擔不起威權體制下的殘酷重量。\n你看著阿公那張面部髮黑的黑白照片，照片中車窗的鐵欄杆格柵如此冰冷。\n\n火車在夜裡向右傾斜，站前的岔道傳來凌亂的車軌聲。你像阿公臨終前一樣，夾著肩膀別過頭去。真相太刺眼，傳說太過虛假，你與家族的記憶一同進入了莫名的惆悵與遺憾之中，在清冷的街道上，無目的地下車。";
+            endText = "你站在真相與傳說的交界，既無法完全沉溺於神祕火車的夢幻，又承擔不起威權體制下的殘酷重量。\n你看著阿公那張面部髮黑的黑白照片，照片中車窗的鐵欄杆格柵如此冰冷。\n\n火車在夜裡向右傾斜，站前的岔道傳傳來凌亂的車軌聲。你像阿公臨終前一樣，夾著肩膀別過頭去。真相太刺眼，傳說太過虛假，你與家族的記憶一同進入了莫名的惆悵與遺憾之中，在清冷的街道上，無目的地下車。";
         } 
         else if (endKey === "end_loop_darkness") {
             titleText = "【怪談結局 ── 消失在純粹的黑暗】";
