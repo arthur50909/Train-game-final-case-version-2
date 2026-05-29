@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>深夜月台的鐵道員 ── 家族記憶尋蹤</title>
+    <title>神祕列車：被陽光遮蓋的光</title>
     <style>
         body {
             background-color: #05070f;
@@ -105,49 +105,28 @@
             box-shadow: 0 0 8px rgba(90, 115, 142, 0.3);
         }
 
-        .truth-white {
-            background: #f5f6f7 !important;
-            color: #1f232a !important;
-            border-color: #1f232a !important;
-            box-shadow: 0 0 40px #ffffff !important;
-        }
-        .truth-white h1, .truth-white #status-bar {
-            color: #1f232a !important;
-            border-color: #d0d4dc !important;
-            background: #e4e7ec !important;
-        }
-        .truth-white button {
-            background: #e4e7ec;
-            color: #1f232a;
-            border-color: #b0b7c4;
-        }
-        .truth-white button:hover {
-            background: #1f232a;
-            color: #ffffff;
+        /* 封面特別樣式：讓按鈕置中 */
+        .title-screen-btn {
+            text-align: center !important;
+            font-size: 18px !important;
+            font-weight: bold;
+            color: #d19a66 !important;
+            border: 2px solid #d19a66 !important;
         }
 
-        .romantic-dark {
-            border-color: #ff9800 !important;
-            box-shadow: 0 0 25px rgba(255, 152, 0, 0.2) !important;
-        }
-
-        .horror-dark {
-            animation: horrorPulse 0.5s infinite alternate;
-            border-color: #7a1f1d !important;
-            box-shadow: 0 0 20px rgba(122, 31, 29, 0.4) !important;
-        }
-        @keyframes horrorPulse {
-            from { background: #080305; color: #d1b6b6; }
-            to { background: #120509; color: #e09999; }
-        }
+        /* 結局與特效樣式 */
+        .truth-white { background: #f5f6f7 !important; color: #1f232a !important; box-shadow: 0 0 40px #ffffff !important; }
+        .romantic-dark { border-color: #ff9800 !important; }
+        .horror-dark { animation: horrorPulse 0.5s infinite alternate; border-color: #7a1f1d !important; }
+        @keyframes horrorPulse { from { background: #080305; } to { background: #120509; } }
     </style>
 </head>
 <body>
 
 <div id="game-container">
-    <h1 id="game-title">深夜月台的鐵道員 ── 家族記憶尋蹤</h1>
+    <h1 id="game-title">神祕列車：被陽光遮蓋的光</h1>
     
-    <div id="status-bar">
+    <div id="status-bar" style="display:none;">
         <span>關卡：<span id="level-display">1/10</span></span>
         <span>時間：<span id="time-display">00:45 AM</span></span>
         <span>歷史清醒度：<span id="hp-display">0%</span></span>
@@ -159,7 +138,7 @@
     </div>
 
     <div id="story-text">
-        正在調閱歷史檔案，重組軌道...
+        正在調閱歷史檔案...
     </div>
 
     <div class="btn-container" id="choices-container"></div>
@@ -167,14 +146,23 @@
 
 <script>
     let gameState = {
-        level: 1,
-        time: "00:45 AM",
+        level: 0,
+        time: "00:00 AM",
         hp: 10, 
         badge: "無",
-        currentScene: "level1"
+        currentScene: "title_screen"
     };
 
     const storyData = {
+        title_screen: {
+            level: 0,
+            time: "深夜",
+            img: "Front-Cover.png", // 💡 修正處：已換成上傳的封面圖檔
+            text: "這是一場穿梭於虛幻與現實、家族與政治、浪漫與殘酷之間的記憶尋蹤。\n\n「不在時刻表上的那班車，到底是載人回家，還是讓人消失？」\n\n根據甘耀明《深夜月台的鐵道員》改編。",
+            choices: [
+                { text: "開始探索記憶軌道", nextScene: "level1", isStart: true }
+            ]
+        },
         level1: {
             level: 1, time: "00:45 AM", 
             img: "Question-1.png", 
@@ -198,7 +186,7 @@
         level3: {
             level: 3, time: "01:05 AM", 
             img: "Question-3.png", 
-            text: "【第 3 關：剪票員的審視】\n凌晨一點，你走向剪票口。剪票員大盤帽下的眼睛昏沉卻銳利，他用一種蘊含狐疑、銳利懾人的眼神認真地打量著你。\n但你心中卻浮上一喜悅，好似別在自己胸口上的一枚勳章，閃動光芒。你如何解讀這個眼神？",
+            text: "【第 3 關：剪票員的審視】\n開車前一小時，你走向剪票口。剪票員大盤帽下的眼睛昏沉卻銳利，他用一種蘊含狐疑、銳利懾人的眼神認真地打量著你。\n但你心中卻浮上一喜悅，好似別在自己胸口上的一枚勳章，閃動光芒。你如何解讀這個眼神？",
             choices: [
                 { text: "A. 他一定也在讚美這趟深夜旅程的美，把夜行火車想像成一串滑動的鑽石掛在荒野。", nextScene: "level4", hpChange: -10 },
                 { text: "B. 這銳利、打量、帶著懷疑的眼神，像極了老相簿裡那些穿著制服、站在阿公身後的陌生特務。", nextScene: "level4", hpChange: 15 },
@@ -208,7 +196,7 @@
         level4: {
             level: 4, time: "01:10 AM", 
             img: "Question-4.png", 
-            text: "【第 4 關：沉睡暴龍的氣味】\n在不同的軌道上，你看到了早晨五點半北上的班車，以及一台沐浴在月光下的 R7 柴油調車機。快要發出暴龍般的吼聲，吐出好聞的柴油味。\n你摘下月台旁盛開的野薑花，你想起了阿公曾經說過，當年他在十六份驛（勝興站）等車時，那輛「時間表上冇的車」掀起吹天的蒸汽，連滿山的翠葉都被蒸炊出一股清香。你決定：",
+            text: "【第 4 關：沉睡暴龍的氣味】\n在不同的軌道上，你看到了早晨五點半北上的班車，以及一台沐浴在月光下的 R7 柴油調車機。你隱隱感覺它發出暴龍般的吼聲，吐出好聞的柴油味。\n你摘下月台旁盛開的野薑花，你想起了阿公曾經說過，當年他在十六份驛（勝興站）等車時，那輛「時間表上冇的車」掀起吹天的蒸汽，連滿山的翠葉都被蒸炊出一股清香。你決定：",
             choices: [
                 { text: "A. 將野薑花獻給鐵軌，希望這股人性芬芳能傳承阿公口中那段奇幻又美麗的記憶。", nextScene: "level5", hpChange: -5, badge: "野薑花" },
                 { text: "B. 站在原地深吸柴油味，心心念念自己一定要買硬票、補票，永遠為火車活下去。", nextScene: "level5", hpChange: -10 },
@@ -220,7 +208,7 @@
             img: "Question-5.png", 
             text: "【第 5 關：黑白相片裡的囚牢】\n1503 次冷平快車入站，尖銳的煞車聲中，你走上列車。車窗湧入的強風逆著你，你不得不扶著翠綠皮座椅前行。\n火車移動，風景後移。在空蕩的車廂裡，你掏出那張阿公獨坐車椅的黑白照片。照片中阿公面部因採光不足而髮黑。這時數十個車窗落下亮光，你突然發現：",
             choices: [
-                { text: "A. 光影反差下，車窗的縱向鐵欄杆投射在阿公身上。如果不仔細看，那光影格柵，彷彿一個暗無天日的囚牢。這張照片不是旅行，是禁庫。", nextScene: "level6", hpChange: 20 },
+                { text: "A. 光影反差下，車窗的縱向鐵欄杆投射在阿公身上。如果不仔細看，那光影格柵，彷彿一個暗無天日的囚牢。這張照片不是旅行，是禁錮。", nextScene: "level6", hpChange: 20 },
                 { text: "B. 阿公的背脊展示出一派定靜，展示著老一輩的神態，為自己說過的神祕列車樹立誠信。", nextScene: "level6", hpChange: -10 },
                 { text: "C. 照片太模糊了，拍不出夜景的細微之處，多半像一場滑過髮際的春夢，不需深究。", nextScene: "level6", hpChange: -5 }
             ]
@@ -245,7 +233,7 @@
                 { text: "C. 歷史的真相就像這陣強光一樣刺眼，威權體制的機器（E200型）開過去時，總是帶著機槍般掃射、令人窒息的壓迫感。", nextScene: "level8", hpChange: 15 }
             ]
         },
-        level8: { // 💡 修正處：原本被誤寫為 level4，現已改回 level8 確保正常銜接
+        level8: {
             level: 8, time: "02:00 AM", 
             img: "Question-8.png", 
             text: "【第 8 關：傳說的戳破】\n你提高音量問大學生們知不知道奔馳在舊山線的神祕列車。穿紀念服的年輕人提高音量說：『我曾在網路看過這篇文章……不過，那是傳說而已。』\n你知道那篇文章是你貼的。你有些沮喪，但你突然想起八年前在海平快車上，阿公談起這件事的表情——阿公說完神祕列車停靠勝興載他之後，便「沉默如雕像」，再也不肯往下說。你現在意識到阿公的沉默是因為：",
@@ -275,113 +263,85 @@
                 { text: "C. 感到無比的迷茫與惆悵，任由火車將你帶進漆黑的風景與無盡的夜裡。", nextScene: "check_destiny", dest: "C" }
             ]
         },
-
         check_destiny: { text: "歷史的軌道切換中...", choices: [] }
     };
 
     function renderScene(sceneKey) {
         if(sceneKey === "restart") {
-            gameState = { level: 1, time: "00:45 AM", hp: 10, badge: "無", currentScene: "level1" };
+            gameState = { level: 0, time: "00:00 AM", hp: 10, badge: "無", currentScene: "title_screen" };
             document.getElementById("game-container").className = ""; 
-            document.getElementById("game-title").innerText = "深夜月台的鐵道員 ── 家族記憶尋蹤";
-            sceneKey = "level1";
+            document.getElementById("game-title").innerText = "神祕列車：被陽光遮蓋的光"; // 💡 重新開始時維持新標題
+            document.getElementById("status-bar").style.display = "none";
+            sceneKey = "title_screen";
         }
 
         gameState.currentScene = sceneKey;
         const scene = storyData[sceneKey];
 
-        if (!scene) {
-            console.error("找不到場景資料:", sceneKey);
-            return;
-        }
+        if (!scene) return;
 
+        // 處理結局判斷
         if (sceneKey === "check_destiny") {
             const destType = scene.chosenDest;
             const currentHP = gameState.hp;
-
-            if (destType === "B") {
-                if (currentHP >= 60) {
-                    renderEnd("end_truth_white"); 
-                } else {
-                    renderEnd("end_melancholy");
-                }
-            } else if (destType === "A") {
-                if (currentHP < 50) {
-                    renderEnd("end_romantic"); 
-                } else {
-                    renderEnd("end_melancholy"); 
-                }
-            } else if (destType === "C") {
-                renderEnd("end_loop_darkness"); 
-            }
+            if (destType === "B") currentHP >= 60 ? renderEnd("end_truth_white") : renderEnd("end_melancholy");
+            else if (destType === "A") currentHP < 50 ? renderEnd("end_romantic") : renderEnd("end_melancholy");
+            else renderEnd("end_loop_darkness");
             return;
         }
 
-        // 更新狀態欄資訊
-        gameState.level = scene.level;
-        gameState.time = scene.time;
-        
-        document.getElementById("level-display").innerText = gameState.level + "/10";
-        document.getElementById("time-display").innerText = gameState.time;
-        document.getElementById("hp-display").innerText = gameState.hp + "%";
-        document.getElementById("badge-display").innerText = gameState.badge;
-        document.getElementById("story-text").innerText = scene.text;
-
-        const imageEl = document.getElementById("game-image-element");
-        if (scene.img) {
-            imageEl.src = scene.img;
-            imageEl.style.display = "block";
+        // 更新 UI 狀態欄
+        if (scene.level > 0) {
+            document.getElementById("status-bar").style.display = "flex";
+            document.getElementById("level-display").innerText = scene.level + "/10";
+            document.getElementById("time-display").innerText = scene.time;
+            document.getElementById("hp-display").innerText = gameState.hp + "%";
+            document.getElementById("badge-display").innerText = gameState.badge;
+        } else {
+            document.getElementById("status-bar").style.display = "none";
         }
+
+        document.getElementById("story-text").innerText = scene.text;
+        const imageEl = document.getElementById("game-image-element");
+        imageEl.src = scene.img;
 
         const choicesContainer = document.getElementById("choices-container");
         choicesContainer.innerHTML = "";
 
-        if (scene.choices) {
-            scene.choices.forEach(choice => {
-                const button = document.createElement("button");
-                button.innerText = choice.text;
-                button.onclick = () => {
-                    if(choice.hpChange !== undefined) gameState.hp += choice.hpChange;
-                    if(choice.badge) gameState.badge = choice.badge;
-                    if(choice.dest) {
-                        storyData["check_destiny"].chosenDest = choice.dest; 
-                    }
-                    renderScene(choice.nextScene);
-                };
-                choicesContainer.appendChild(button);
-            });
-        }
+        scene.choices.forEach(choice => {
+            const button = document.createElement("button");
+            button.innerText = choice.text;
+            if (choice.isStart) button.className = "title-screen-btn";
+            button.onclick = () => {
+                if(choice.hpChange !== undefined) gameState.hp += choice.hpChange;
+                if(choice.badge) gameState.badge = choice.badge;
+                if(choice.dest) storyData["check_destiny"].chosenDest = choice.dest; 
+                renderScene(choice.nextScene);
+            };
+            choicesContainer.appendChild(button);
+        });
     }
 
     function renderEnd(endKey) {
-        let endText = "";
-        let endImg = "";
-        let containerClass = "";
-        let titleText = "深夜月台的鐵道員 ── 終局";
+        let endText = "", endImg = "", containerClass = "", titleText = "神祕列車 ── 終局";
+        document.getElementById("status-bar").style.display = "flex";
 
         if (endKey === "end_truth_white") {
             titleText = "【核心結局 ── 刺眼的歷史真相】";
-            endImg = "Core-End.png"; 
-            containerClass = "truth-white";
-            endText = "火車衝出山洞，清晨極度刺眼的「白晝之光」瞬間填滿了整個世界。\n你終於徹底清醒。那班不在時刻表上的車，根本沒有載阿公回家，而是將他送往了火燒島（綠島）監禁了二十年。阿婆病危的通知，只是特務將他誘捕出來的殘酷謊言。\n\n阿公臨終前的哭泣，是因為你眼中的浪漫光明，正是他一生最深沉的政治創傷。歷史的真相太過刺眼，但你沒有別過頭。你握著帶有反共標語的車票與乾枯的野薑花，決定替沉默如雕像的長輩，永遠記住這個家、這座島嶼曾承受的重量。";
-        } 
-        else if (endKey === "end_romantic") {
+            endImg = "Core-End.png"; containerClass = "truth-white";
+            endText = "火車衝出山洞，清晨極度刺眼的「白晝之光」瞬間填滿了整個世界。\n你終於徹底清醒。那班不在時刻表上的車，根本沒有載阿公回家，而是將他送往了火燒島監禁了二十年。\n\n你握著車票與野薑花，決定替沉默如雕像的長輩，永遠記住這個家曾承受的重量。";
+        } else if (endKey === "end_romantic") {
             titleText = "【防衛結局 ── 記憶的浪漫包裝】";
-            endImg = "Defence-End.png"; 
-            containerClass = "romantic-dark";
-            endText = "轟隆隆隆！一蕊燈火從山洞底靠來，拖著驚人的腳步聲，那是一隻蒸汽獨眼巨龍，吼著霹靂的汽笛，破霧而來！\n你的「浪漫防衛機制」戰勝了殘酷。歷史的傷痛太過沉重，你選擇用後輩的缺乏認知，繼續對家族記憶進行浪漫化的想像。你快樂地跳上了這班想像中的神祕列車，與阿公在傳說裡晤面。\n\n但在車窗的倒影中，你隱約看見，那璀璨的流光背後，其實是一整片暗無天日的囚牢。你用傳說美化了悲劇，痛苦依舊在黑暗中失去了說明能力。";
-        } 
-        else if (endKey === "end_melancholy") {
+            endImg = "Defence-End.png"; containerClass = "romantic-dark";
+            endText = "轟隆隆隆！蒸汽獨眼巨龍破霧而來！\n你選擇用後輩的缺乏認知，繼續對家族記憶進行浪漫化的想像。你跳上了神祕列車，與阿公在傳說裡晤面。\n\n但在車窗的倒影中，你隱約看見那璀璨背後，其實是一整片暗無天日的囚牢。";
+        } else if (endKey === "end_melancholy") {
             titleText = "【惆悵結局 ── 一生進入莫名惆悵】";
-            endImg = "Sad-End.png"; 
-            containerClass = "horror-dark";
-            endText = "你站在真相與傳說的交界，既無法完全沉溺於神祕火車的夢幻，又承擔不起威權體制下的殘酷重量。\n你看著阿公那張面部髮黑的黑白照片，照片中車窗的鐵欄杆格柵如此冰冷。\n\n火車在夜裡向右傾斜，站前的岔道傳傳來凌亂的車軌聲。你像阿公臨終前一樣，夾著肩膀別過頭去。真相太刺眼，傳說太過虛假，你與家族的記憶一同進入了莫名的惆悵與遺憾之中，在清冷的街道上，無目的地下車。";
-        } 
-        else if (endKey === "end_loop_darkness") {
+            endImg = "Sad-End.png"; containerClass = "horror-dark";
+            endText = "你站在真相與傳說的交界，承擔不起威權體制下的殘酷重量。\n你看著阿公髮黑的照片，像他臨終前一樣，夾著肩膀別過頭去。真相太刺眼，傳說太過虛假，你與記憶一同進入了莫名的惆悵。";
+        } else {
             titleText = "【怪談結局 ── 消失在純粹的黑暗】";
-            endImg = "Worst-End.png"; 
-            containerClass = "horror-dark";
-            endText = "你選擇了逃避。火車開進了最深邃的山洞，車廂內的日光燈全數熄滅，世界陷入了阿公臨終病房內那種「純粹的黑暗」。\n耳邊傳來字正腔圓的老人聲音、大學生啪咑啪咑的制服展翅聲、以及剪票員銳利懾人的打量，全部混雜成抓人警車的暴龍吼聲。\n\n威權時期的深夜，某人會突然被一班不在時刻表上的車帶走，從此在社會上消失。黑暗中，你發現自己身上別著的「勳章」變成了冰冷的手銬，你的輪廓在漆黑的風景中被徹底抹去。你成為了另一個在深夜被神祕列車帶走、從此隱沒在歷史迷霧中的失蹤者。";
+            endImg = "Worst-End.png"; containerClass = "horror-dark";
+            endText = "你選擇了逃避。火車開進了最深邃的山洞，日光燈熄滅，世界陷入純粹的黑暗。\n黑暗中，你發現自己身上的「勳章」變成了冰冷的手銬，你的輪廓被徹底抹去。你成為了另一個在深夜隱沒在歷史迷霧中的失蹤者。";
         }
 
         document.getElementById("game-title").innerText = titleText;
@@ -400,7 +360,7 @@
         choicesContainer.appendChild(button);
     }
 
-    renderScene("level1");
+    renderScene("title_screen");
 </script>
 
 </body>
